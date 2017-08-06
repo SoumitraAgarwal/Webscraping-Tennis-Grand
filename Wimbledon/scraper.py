@@ -18,56 +18,9 @@ response = session.body()
 soup = BeautifulSoup(response, "lxml")
 
 data = soup.find('table', class_='tennis')
-# text = data.find(text = True)
-print(data)
-	
-# driver.get(url,proxies=proxies)
+text = []
 
-# This will get the initial html - before javascript
-# html1 = driver.page_source
-
-# This will get the html after on-load javascript
-# html2 = driver.execute_script("return document.documentElement.innerHTML;")
-# print(html2)
-# A=[]
-# B=[]
-
-# for row in right_table.findAll("tr"):
-#     cells = row.find("td")
-#     if(cells!=None):
-#     	a = cells.find("a")
-#     	if(a!=None):
-# 	    	A.append(a["title"])
-# 	        B.append(a["href"])
-
-# temp_df=pd.DataFrame({'Name':A, 'url' : B})
-# print(temp_df)
-
-# for i in range(2,588):
-# 	print(i)
-# 	url_temp = url+'/players/'+str(i)+'/'
-	
-# 	while(True):
-# 		print("Getting page "+str(i))
-# 		try:
-# 			page = requests.get(url_temp,proxies=proxies)
-# 		except requests.exceptions.RequestException as e:  # This is the correct syntax
-# 			print(e)
-# 			continue
-# 		break
-
-# 	html = page.content
-# 	soup = BeautifulSoup(html,'lxml')
-# 	right_table=soup.find('table', class_='table table-striped players')
-
-# 	for row in right_table.findAll("tr"):
-# 	    cells = row.find("td")
-# 	    if(cells!=None):
-# 	    	a = cells.find("a")
-# 	    	if(a!=None):
-# 		    	A.append(a["title"])
-# 		        B.append(a["href"])
-# 	df=pd.DataFrame({'Name':A, 'url' : B})
-# 	print(df)
-# df.to_csv('Names.csv', index = False, encoding = 'utf-8')
-
+for row in data:
+	f = open('table.txt', 'a+')
+	f.write(str(row) + "\n")
+	f.close()
