@@ -29,8 +29,9 @@ for row in right_table.findAll("tr", class_ = 'player-row'):
 	        Player.append(a.find(text = True))
 	        iterator += 1
 
-	print("Done for " + Player[iterator])
-	df=pd.DataFrame({'Name':Player, 'url' : URL})
-	print(df)
-	df.to_csv('Names.csv', index = False, encoding = 'utf-8')
+    if(iterator > 0):
+		print("Done for " + Player[iterator - 1])
+		df=pd.DataFrame({'Name':Player, 'url' : URL})
+		print(df)
+		df.to_csv('Names.csv', index = False, encoding = 'utf-8')
 
