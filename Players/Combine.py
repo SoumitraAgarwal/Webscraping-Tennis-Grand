@@ -15,3 +15,9 @@ for i in range(2,len(images)):
 	image1 = cv2.imread(base+images[i])
 	cv2.addWeighted(image1, 1.0/len(images), output, 1, 0, output)
 cv2.imwrite("Output1.jpg", output)
+
+from matplotlib.pyplot import imshow
+from PIL import Image
+
+pil_im = Image.open('Output1.jpg', 'r')
+imshow(np.asarray(pil_im))
