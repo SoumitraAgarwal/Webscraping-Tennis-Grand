@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import os
 
-base = 'Pictures1/'
+base = 'Pictures2/'
 images = os.listdir(base)
 
 for j in range(0,len(images), 50):
@@ -15,6 +15,6 @@ for j in range(0,len(images), 50):
 		# load the image
 		image1 = cv2.imread(base+images[i])
 		cv2.addWeighted(image1, 1.0/min(100, len(images) - j), output, 1, 0, output)
-	cv2.imwrite("Pictures2/Output" + str(j) + ".jpg", output)
+	cv2.imwrite("OutputComb" + str(j) + ".jpg", output)
 
 
