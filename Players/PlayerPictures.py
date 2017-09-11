@@ -4,8 +4,8 @@ import os
 import requests
 import shutil
 
-if("Pictures" not in os.listdir(".")):
-	os.mkdir("Pictures")
+if("Pictures1" not in os.listdir(".")):
+	os.mkdir("Pictures1")
 
 proxies = {
   'http': 'http://172.16.114.19:3128',
@@ -23,18 +23,21 @@ iterat  = 0
 
 for avatar in avatars:
 	Nat 	= avatar.find('img')
+	rank	= soup.find('td', class_= "rank-cell")
+	rank 	= int(rank.find(text=True))
 	name 	= names[iterat].find(text = True)
 	iterat += 1
 
 	print("Working for " + name + " " + str(iterat))
 	
-	while(True):
-		try:
-			response = requests.get(url+Nat['src'], stream=True,proxies=proxies)
-		except requests.exceptions.RequestException as e:  # This is the correct syntax
-			print(e)
-			continue
-		break
-	with open('Pictures/'+ name +'.png', 'wb') as out_file:
-		shutil.copyfileobj(response.raw, out_file)
-	del response
+	for i in range((103-rank)/2):
+		while(True):
+			try:
+				response = requests.get(url+Nat['src'], stream=True,proxies=proxies)
+			except requests.exceptions.RequestException as e:  # This is the correct syntax
+				print(e)
+				continue
+			break	
+		with open('Pictures1/'+ name + str(i) + '.png', 'wb') as out_file:
+			shutil.copyfileobj(response.raw, out_file)
+		del response
