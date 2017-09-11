@@ -30,7 +30,8 @@ for avatar in avatars:
 
 	print("Working for " + name + " " + str(iterat))
 	
-	for i in range((103-rank)/2):
+	for i in range((103-iterat)/3):
+		print(i)
 		while(True):
 			try:
 				response = requests.get(url+Nat['src'], stream=True,proxies=proxies)
