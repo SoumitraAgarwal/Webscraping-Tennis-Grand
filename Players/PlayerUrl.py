@@ -14,7 +14,7 @@ page = requests.get(url,proxies=proxies)
 
 html = page.content
 soup = BeautifulSoup(html,'lxml')
-right_table=soup.find('table', class_='tennis-table')
+right_table = soup.find('table', class_='tennis-table')
 
 URL = []
 Player = []

@@ -1,37 +1,40 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import os
-import urllib2
 import requests
-import pandas as pd
+import shutil
 
-os.mkdir("Pictures")
-data = pd.read_csv("Names.csv")
-url = "http://www.tennis.com"
+if("Pictures" not in os.listdir(".")):
+	os.mkdir("Pictures")
 
 proxies = {
-  'http': 'http://172.16.114.112:3128',
-  'https': 'https://172.16.114.112:3128',
+  'http': 'http://172.16.114.19:3128',
+  'https': 'https://172.16.114.19:3128',
 }
 
-for i in range(len(data)):
-	print("Working for " + data["Name"][i])
+url 	= "http://www.atpworldtour.com"
+page 	= open("scrape.html")
+soup 	= BeautifulSoup(page.read(), "lxml")
 
-	temp_url = url + data["url"][i]
-	page = requests.get(temp_url,proxies=proxies)
+avatars = soup.findAll('td', class_="player-avatar-cell")
+names	= soup.findAll('td', class_="player-cell")
 
-	html = page.content
-	soup = BeautifulSoup(html,'lxml')
-	Nat	 = soup.find('div', class_='player-image')
-	print(Nat['data-image'])
+iterat  = 0
+
+for avatar in avatars:
+	Nat 	= avatar.find('img')
+	name 	= names[iterat].find(text = True)
+	iterat += 1
+
+	print("Working for " + name + " " + str(iterat))
+	
 	while(True):
 		try:
-			response = requests.get(Nat['data-image'], stream=True,proxies=proxies)
+			response = requests.get(url+Nat['src'], stream=True,proxies=proxies)
 		except requests.exceptions.RequestException as e:  # This is the correct syntax
 			print(e)
 			continue
 		break
-		
-	with open('Pictures/'+ data['Name'][i]+'.png', 'wb') as out_file:
+	with open('Pictures/'+ name +'.png', 'wb') as out_file:
 		shutil.copyfileobj(response.raw, out_file)
 	del response
