@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import os
 
-base = '../input/Pictures/'
+base = 'Pictures/'
 images = os.listdir(base)
 images = images[:150]
 output = cv2.imread(base+images[0])
